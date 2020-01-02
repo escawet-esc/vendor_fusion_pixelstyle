@@ -23,7 +23,9 @@ PRODUCT_PACKAGES += \
     PixelThemesStub2019 \
     SafetyHubPrebuilt \
     SettingsIntelligenceGooglePrebuilt \
-    GooglePermissionControllerOverlay
+    GooglePermissionControllerOverlay \
+    PixelDocumentsUIGoogleOverlay \
+    RetroMusicPlayer
 
 ifeq ($(TARGET_GAPPS_ARCH),arm64)
 PRODUCT_PACKAGES += \
