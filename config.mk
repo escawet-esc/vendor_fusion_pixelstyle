@@ -26,7 +26,8 @@ PRODUCT_PACKAGES += \
     GooglePermissionControllerOverlay \
     PixelDocumentsUIGoogleOverlay \
     RetroMusicPlayer \
-    GalleryGoPrebuilt
+    GalleryGoPrebuilt \
+    Via
 
 ifeq ($(TARGET_GAPPS_ARCH),arm64)
 PRODUCT_PACKAGES += \
