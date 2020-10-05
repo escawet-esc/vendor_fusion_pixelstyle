@@ -263,7 +263,7 @@
     <string name="config_wallpaperCropperPackage">com.google.android.apps.wallpaper</string>
 
     <!-- Enable the RingtonePickerActivity in 'com.android.providers.media'. -->
-    <bool name="config_defaultRingtonePickerEnabled">false</bool>
+    <bool name="config_defaultRingtonePickerEnabled">true</bool>
 
     <!-- Flag indicating whether the assist disclosure can be disabled using
          ASSIST_DISCLOSURE_ENABLED. -->
