@@ -39,10 +39,6 @@ PRODUCT_PACKAGES += \
     charger_res_images \
     product_charger_res_images
 
-# build.prop entrys
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.wallpapers_loc_request_suw=true
-
 # Bootanimation
 ifeq ($(TARGET_BOOT_ANIMATION_RES),1080)
      PRODUCT_COPY_FILES += $(LOCAL_PATH)/bootanimation/bootanimation_1080.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
@@ -61,154 +57,52 @@ else
     PRODUCT_COPY_FILES += $(LOCAL_PATH)/bootanimation/bootanimation_1080.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
 endif
 
-# Files
-PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/etc,$(TARGET_COPY_OUT_PRODUCT)/etc)
-PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/fonts,$(TARGET_COPY_OUT_PRODUCT)/fonts)
-PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/media,$(TARGET_COPY_OUT_PRODUCT)/media)
-
-# SetupWizard
-PRODUCT_PRODUCT_PROPERTIES += \
-    setupwizard.enable_assist_gesture_training=true \
-    setupwizard.feature.baseline_setupwizard_enabled=true \
-    setupwizard.feature.show_pixel_tos=true \
-    setupwizard.feature.show_support_link_in_deferred_setup=false \
-    setupwizard.theme=glif_v3_light
-
 # Gestures
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural
 
-# Sounds
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.ringtone=The_big_adventure.ogg \
-    ro.config.notification_sound=Popcorn.ogg \
-    ro.config.alarm_alert=Bright_morning.ogg
-
-# IME
+# Gboard configuration
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.com.google.ime.bs_theme=true \
-    ro.com.google.ime.system_lm_dir=/system/product/usr/share/ime/google/d3_lms \
-    ro.com.google.ime.theme_id=5
+    ro.com.google.ime.theme_id=5 \
+    ro.com.google.ime.system_lm_dir=/product/usr/share/ime/google/d3_lms
 
-# CarrierSettings, replace CarrierConfig
-PRODUCT_PACKAGES += \
-    CarrierSettings
+# SetupWizard configuration
+PRODUCT_PRODUCT_PROPERTIES += \
+    setupwizard.feature.baseline_setupwizard_enabled=true \
+    ro.setupwizard.enterprise_mode=1 \
+    ro.setupwizard.rotation_locked=true \
+    setupwizard.enable_assist_gesture_training=true \
+    setupwizard.theme=glif_v3_light \
+    setupwizard.feature.skip_button_use_mobile_data.carrier1839=true \
+    setupwizard.feature.show_pai_screen_in_main_flow.carrier1839=false \
+    setupwizard.feature.show_pixel_tos=false
 
-#
-# Carrier configs by Google, parsed by CarrierSettings
-#
-# Carrier List
-PRODUCT_PACKAGES += \
-    carrier_list.pb
+# StorageManager configuration
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.storage_manager.show_opt_in=false
 
-# Defaults
-PRODUCT_PACKAGES += \
-    default.pb
+# OPA configuration
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.opa.eligible_device=true
 
-# Australia
-PRODUCT_PACKAGES += \
-    optus_au.pb \
-    telstra_au.pb \
-    vodafone_au.pb
+# Google legal
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html \
+    ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html
 
-# Canada
-PRODUCT_PACKAGES += \
-    bell_ca.pb \
-    fido_ca.pb \
-    fizz_ca.pb \
-    freedommobile_ca.pb \
-    koodo_ca.pb \
-    luckymobile_ca.pb \
-    pcmobilebell_ca.pb \
-    rogers_ca.pb \
-    solomobile_ca.pb \
-    telus_ca.pb \
-    videotron_ca.pb \
-    virgin_ca.pb
+# Google Play services configuration
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.com.google.clientidbase=android-google \
+    ro.error.receiver.system.apps=com.google.android.gms \
+    ro.atrace.core.services=com.google.android.gms,com.google.android.gms.ui,com.google.android.gms.persistent
 
-# France
-PRODUCT_PACKAGES += \
-    bouygues_fr.pb \
-    orange_fr.pb \
-    sfr_fr.pb
+# Include product overlays
+PRODUCT_PACKAGE_OVERLAYS += \
+    $(LOCAL_PATH)/overlay
 
-# Germany
-PRODUCT_PACKAGES += \
-    o2_de.pb \
-    telekom_de.pb \
-    vodafone_de.pb
+# Inherit from audio config
+$(call inherit-product, vendor/pixelstyle/config/audio.mk)
 
-# India
-PRODUCT_PACKAGES += \
-    airtel_in.pb \
-    idea_in.pb \
-    rjio_in.pb \
-    vodafone_in.pb
-
-# Italy
-PRODUCT_PACKAGES += \
-    vodafone_it.pb
-
-# Japan
-PRODUCT_PACKAGES += \
-    docomo_jp.pb \
-    kddi_jp.pb \
-    rakuten_jp.pb \
-    softbank_jp.pb
-
-# Netherlands
-PRODUCT_PACKAGES += \
-    vodafone_nl.pb
-
-# Singapore
-PRODUCT_PACKAGES += \
-    singtel_sg.pb \
-    starhub_sg.pb
-
-# Spain
-PRODUCT_PACKAGES += \
-    orange_es.pb \
-    vodafone_es.pb
-
-# Taiwan
-PRODUCT_PACKAGES += \
-    cht_tw.pb \
-    fet_tw.pb \
-    twm_tw.pb
-
-# United Kingdom
-PRODUCT_PACKAGES += \
-    ee_gb.pb \
-    h3_gb.pb \
-    idmobile_gb.pb \
-    o2postpaid_gb.pb \
-    o2prepaid_gb.pb \
-    vodafone_gb.pb
-
-# United States
-PRODUCT_PACKAGES += \
-    att5g_us.pb \
-    att_us.pb \
-    cellcom_us.pb \
-    cricket5g_us.pb \
-    cricket_us.pb \
-    cspire_us.pb \
-    firstnetpacific_us.pb \
-    firstnet_us.pb \
-    fi_us.pb \
-    sprint_us.pb \
-    sprintwholesale_us.pb \
-    tmobile_us.pb \
-    uscc_us.pb \
-    verizon_us.pb \
-    visible_us.pb \
-    xfinity_us.pb
-
-# Other countries
-PRODUCT_PACKAGES += \
-    others.pb
-
-# Include package overlays
-PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += $(LOCAL_PATH)/overlay
-DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay/common/
+# Inherit from fonts config
+$(call inherit-product, vendor/pixelstyle/config/fonts.mk)
